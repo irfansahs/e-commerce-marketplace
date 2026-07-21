@@ -13,12 +13,22 @@ docker compose up -d
 docker compose ps
 ```
 
+## Observability (Graylog — optional)
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.observability.yml --profile observability up -d
+```
+
 | Service | Port |
 |---------|------|
 | Postgres | 5432 |
 | Redis | 6379 |
 | RabbitMQ | 5672, UI 15672 |
 | Nginx (static) | 8080 |
+| Graylog UI | 9000 (observability profile) |
+| GELF UDP | 12201 (observability profile) |
+
+See [infra/graylog/README.md](infra/graylog/README.md) for Graylog.
 
 Smoke:
 

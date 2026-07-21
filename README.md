@@ -58,6 +58,21 @@ docker compose up -d
 
 Durdurmak: `docker compose down` (veriler volume’larda kalır; `-v` volume’ları siler).
 
+### Observability (Graylog, opsiyonel — lokal)
+
+RAM ~2GB+ ister; EC2 web deploy’a dahil değil.
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.observability.yml --profile observability up -d
+```
+
+| Servis | Port | Açıklama |
+|--------|------|----------|
+| Graylog UI | 9000 | `admin` + `.env` şifre hash’i (dev: `admin`) |
+| GELF UDP | 12201 | Serilog / container logları (ileri) |
+
+Bkz. [infra/graylog/README.md](infra/graylog/README.md).
+
 ## Geliştirme sırası
 
 Sprint ve backlog GitHub Projects üzerinde yönetilir. Önce altyapı (Docker, gateway, observability), sonra domain servisleri ve UI.

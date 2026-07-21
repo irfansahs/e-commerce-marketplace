@@ -27,11 +27,13 @@ Asenkron iletişim: **RabbitMQ** (domain events, saga adımları).
 - Redis: oturum/cache, gateway QoS yardımcıları.
 - RabbitMQ: exchange/queue tasarımı servis başına dokümante edilecek (DLQ, idempotency).
 
-## Observability (ileri sprint)
+## Observability (Sprint 1 — lokal)
 
-- Serilog + correlation id
-- Graylog (GELF)
-- Health: `/health` tüm HTTP servislerde
+- Compose: [docker-compose.observability.yml](../docker-compose.observability.yml) profile `observability` (Graylog 6 + MongoDB + OpenSearch).
+- UI: http://localhost:9000 · GELF UDP: 12201.
+- .NET (Sprint 1 #5): Serilog sink → GELF; correlation id middleware (BuildingBlocks).
+- Health: `GET /health` tüm HTTP servislerde (Sprint 1 #6).
+- EC2: yalnızca `docker-compose.web.yml`; Graylog lokal geliştirmede.
 
 ## Monorepo
 

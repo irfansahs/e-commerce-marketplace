@@ -1,0 +1,79 @@
+# Observability profile: Graylog + MongoDB + OpenSearch
+# Usage: docker compose -f docker-compose.yml -f docker-compose.observability.yml --profile observability up -d
+
+services:
+  graylog-mongodb:
+    image: mongo:6
+    container_name: marketplace-graylog-mongodb
+    profiles: [observability]
+    restart: unless-stopped
+    volumes:
+      - graylog_mongodb_data:/data/db
+    networks:
+      - marketplace
+
+  graylog-opensearch:
+    image: opensearchproject/opensearch:2.11.1
+    container_name: marketplace-graylog-opensearch
+    profiles: [observability]
+    restart: unless-stopped
+    environment:
+      discovery.type: single-node
+      DISABLE_SECURITY_PLUGIN: "true"
+      OPENSEARCH_JAVA_OPTS: -Xms512m -Xmx512m
+      bootstrap.memory_lock: "true"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - graylog_opensearch_data:/usr/share/opensearch/data
+    networks:
+      - marketplace
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:9200/_cluster/health || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
+
+  graylog:
+    image: graylog/graylog:6.0
+    container_name: marketplace-graylog
+    profiles: [observability]
+    restart: unless-stopped
+    depends_on:
+      graylog-mongodb:
+        condition: service_started
+      graylog-opensearch:
+        condition: service_healthy
+    environment:
+      GRAYLOG_NODE_ID_FILE: /usr/share/graylog/data/config/node-id
+      GRAYLOG_PASSWORD_SECRET: ${GRAYLOG_PASSWORD_SECRET:-change_me_graylog_secret_min16}
+      GRAYLOG_ROOT_PASSWORD_SHA2: ${GRAYLOG_ROOT_PASSWORD_SHA2:-8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918}
+      GRAYLOG_HTTP_BIND_ADDRESS: 0.0.0.0:9000
+      GRAYLOG_HTTP_EXTERNAL_URI: http://127.0.0.1:9000/
+      GRAYLOG_MONGODB_URI: mongodb://graylog-mongodb:27017/graylog
+      GRAYLOG_ELASTICSEARCH_HOSTS: http://graylog-opensearch:9200
+    ports:
+      - "9000:9000"
+      - "12201:12201/udp"
+    volumes:
+      - graylog_data:/usr/share/graylog/data
+    networks:
+      - marketplace
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:9000/api/system/lbstatus || exit 1"]
+      interval: 20s
+      timeout: 10s
+      retries: 10
+      start_period: 120s
+
+networks:
+  marketplace:
+    name: marketplace-network
+
+volumes:
+  graylog_mongodb_data:
+  graylog_opensearch_data:
+  graylog_data:

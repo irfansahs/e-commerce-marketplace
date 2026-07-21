@@ -38,14 +38,25 @@ docker compose up -d
 
 | Servis | Port | Açıklama |
 |--------|------|----------|
-| PostgreSQL | 5432 | Veritabanı |
+| PostgreSQL | 5432 | `marketplace` + servis DB’leri (aşağıda) |
 | Redis | 6379 | Cache |
 | RabbitMQ | 5672, 15672 | AMQP + Management UI |
 | Nginx | 8080 | Static `index.html` (+ ileride Ocelot) |
 
 RabbitMQ yönetim arayüzü: `http://localhost:15672` (kullanıcı/şifre `.env` içinde).
 
-Durdurmak: `docker compose down` (veriler volume’larda kalır).
+**PostgreSQL servis veritabanları** (ilk `docker compose up` ile, boş volume):
+
+`identity_db`, `catalog_db`, `cart_order_db`, `inventory_db`, `payment_db`, `notification_db`
+
+Init script: [infra/postgres/init/01-create-databases.sql](infra/postgres/init/01-create-databases.sql). Mevcut volume’da init tekrar çalışmaz; DB’leri sıfırlamak için:
+
+```bash
+docker compose down -v
+docker compose up -d
+```
+
+Durdurmak: `docker compose down` (veriler volume’larda kalır; `-v` volume’ları siler).
 
 ## Geliştirme sırası
 

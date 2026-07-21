@@ -20,7 +20,10 @@ Asenkron iletişim: **RabbitMQ** (domain events, saga adımları).
 
 ## Veri
 
-- PostgreSQL: her servis kendi veritabanı (`identity_db`, `catalog_db`, …).
+- PostgreSQL: tek instance; servis başına database:
+  - `marketplace` (varsayılan)
+  - `identity_db`, `catalog_db`, `cart_order_db`, `inventory_db`, `payment_db`, `notification_db`
+- Lokal oluşturma: [infra/postgres/init/01-create-databases.sql](infra/postgres/init/01-create-databases.sql) (`docker-entrypoint-initdb.d`, yalnızca boş volume).
 - Redis: oturum/cache, gateway QoS yardımcıları.
 - RabbitMQ: exchange/queue tasarımı servis başına dokümante edilecek (DLQ, idempotency).
 

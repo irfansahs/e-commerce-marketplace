@@ -41,7 +41,7 @@ docker compose up -d
 | PostgreSQL | 5432 | Veritabanı |
 | Redis | 6379 | Cache |
 | RabbitMQ | 5672, 15672 | AMQP + Management UI |
-| Nginx | 8080 | Reverse proxy iskeleti |
+| Nginx | 8080 | Static `index.html` (+ ileride Ocelot) |
 
 RabbitMQ yönetim arayüzü: `http://localhost:15672` (kullanıcı/şifre `.env` içinde).
 

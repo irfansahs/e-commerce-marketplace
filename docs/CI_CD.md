@@ -1,38 +1,41 @@
-# AWS CI/CD (Faz C — plan)
+# AWS CI/CD
 
-Bu faz **repo + lokal Docker** tamamlandıktan sonra uygulanır.
+## Akış
 
-## Hedef
+`main` push veya manuel **Actions → Deploy to EC2** → SSH → `git pull` → `docker compose -f docker-compose.web.yml up -d`
 
-`main` branch push veya manuel workflow → GitHub Actions → SSH ile EC2 → `git pull` + `docker compose up -d`.
+Şimdilik EC2’de yalnızca Nginx + `apps/web/public/index.html` (port 80).
 
 ## GitHub Secrets
 
 | Secret | Açıklama |
 |--------|----------|
-| `EC2_HOST` | EC2 public hostname veya IP |
-| `EC2_USER` | Örn. `ec2-user` |
+| `EC2_HOST` | EC2 public IP veya hostname |
+| `EC2_USER` | `ec2-user` |
 | `EC2_SSH_KEY` | Private key içeriği (PEM) |
+
+Secrets’ı CLI ile set etmek:
+
+```bash
+gh secret set EC2_HOST --body "YOUR_IP"
+gh secret set EC2_USER --body "ec2-user"
+gh secret set EC2_SSH_KEY < bot-anahtar.pem
+```
+
+**PEM asla commit edilmez** (`.gitignore`: `*.pem`).
 
 ## EC2 önkoşullar
 
-- Docker + Docker Compose plugin
+- Docker Engine + Compose plugin
 - Git
-- Repo clone path (örn. `/home/ec2-user/e-commerce-marketplace`)
-- Security group: SSH kaynağı kısıtlı
+- Security group: **22** (SSH), **80** (HTTP)
+- Repo path: `~/e-commerce-marketplace`
 
-## Workflow (eklenecek)
+## Lokal web smoke
 
-Dosya: `.github/workflows/deploy-ec2.yml` (henüz aktif değil; issue ile takip edilir)
+```bash
+docker compose -f docker-compose.web.yml up -d
+# http://localhost:80  (Windows’ta admin gerekebilir; alternatif: NGINX_PORT=8080)
+```
 
-Adımlar:
-
-1. Checkout
-2. SSH action ile EC2’ye bağlan
-3. `cd` repo → `git pull origin main`
-4. `docker compose pull` (image’lar hazır olduğunda)
-5. `docker compose up -d`
-
-## Not
-
-`screen -r` gibi oturum yönetimi opsiyonel; production için `systemd` unit veya compose restart policy tercih edilir.
+Tam altyapı (Postgres/Redis/RabbitMQ) için kök `docker-compose.yml` kullanılır.

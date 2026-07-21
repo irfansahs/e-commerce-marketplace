@@ -30,16 +30,17 @@ Asenkron iletişim: **RabbitMQ** (domain events, saga adımları).
 
 - Compose: [docker-compose.observability.yml](../docker-compose.observability.yml) profile `observability` (Graylog 6 + MongoDB + OpenSearch).
 - UI: http://localhost:9000 · GELF UDP: 12201.
-- .NET (Sprint 1 #5): Serilog sink → GELF; correlation id middleware (BuildingBlocks).
-- Health: `GET /health` tüm HTTP servislerde (Sprint 1 #6).
+- .NET (Sprint 1): Serilog → GELF via BuildingBlocks; see [LOGGING.md](LOGGING.md).
+- Health: `GET /health` on all HTTP services; see [HEALTH.md](HEALTH.md).
 - EC2: yalnızca `docker-compose.web.yml`; Graylog lokal geliştirmede.
 
 ## Monorepo
 
 ```
 apps/web/
-services/gateway/      # Ocelot
-services/identity/
+services/building-blocks/   # Serilog GELF + /health helpers
+services/gateway/           # Ocelot
+services/identity/          # Identity API (scaffold)
 services/catalog/
 services/cart-order/
 services/inventory/
@@ -47,6 +48,7 @@ services/payment/
 services/notification/
 infra/nginx/
 infra/graylog/
+infra/mssql/
 ```
 
 ## Deploy hedefi (Faz C)

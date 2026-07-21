@@ -17,10 +17,11 @@ docker compose -f docker-compose.yml -f docker-compose.observability.yml --profi
 - User: `admin`
 - Password: value used for `GRAYLOG_ROOT_PASSWORD_SHA2` in `.env` (default dev: `admin` — change in `.env`)
 
-## GELF (for .NET Serilog later)
+## GELF (for .NET Serilog)
 
 - UDP **12201** on host → Graylog container
 - In Graylog UI: **System → Inputs → GELF UDP** (create if not auto-configured; bind 0.0.0.0:12201)
+- .NET wiring: [docs/LOGGING.md](../../docs/LOGGING.md) (`AddMarketplaceLogging` + Identity smoke host)
 
 ## Resources
 

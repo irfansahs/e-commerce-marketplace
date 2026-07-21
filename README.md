@@ -7,7 +7,7 @@
 | Katman | Teknoloji |
 |--------|-----------|
 | Frontend | Next.js (App Router) |
-| Backend | .NET 8 mikroservisler |
+| Backend | .NET 10 mikroservisler |
 | API Gateway | Ocelot |
 | Edge | Nginx |
 | Messaging | RabbitMQ |

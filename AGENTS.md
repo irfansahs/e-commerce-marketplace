@@ -4,17 +4,19 @@ Portable project brief for AI agents (Cursor, Copilot, Claude Code, etc.).
 
 ## Product
 
-Multi-vendor e-commerce marketplace. Buyers, sellers, admin. Microservices on .NET 8, storefront on Next.js (App Router).
+Multi-vendor e-commerce marketplace. Buyers, sellers, admin. Microservices on .NET 10, storefront on Next.js (App Router).
 
 ## Repository layout
 
 ```
-apps/web/           Next.js (storefront + seller/admin route groups)
-services/gateway/   Ocelot API gateway (planned)
-services/*          Identity, Catalog, Cart-Order, Inventory, Payment, Notification
-infra/nginx/        Edge reverse proxy config
-infra/graylog/      Observability (planned)
-docs/               Architecture, sprints, CI/CD, Cursor guide
+apps/web/ Next.js (storefront + seller/admin route groups)
+services/building-blocks/ Shared logging + health helpers
+services/gateway/ Ocelot API gateway (planned)
+services/identity/ Identity API (health + logging scaffold)
+services/* Catalog, Cart-Order, Inventory, Payment, Notification
+infra/nginx/ Edge reverse proxy config
+infra/graylog/ Observability (local profile)
+docs/ Architecture, sprints, CI/CD, Cursor guide
 ```
 
 ## Stack
@@ -22,8 +24,8 @@ docs/               Architecture, sprints, CI/CD, Cursor guide
 - **API:** Ocelot gateway, Nginx edge
 - **Data:** SQL Server 2022 (one DB per service), Redis cache
 - **Messaging:** RabbitMQ (domain events, sagas)
-- **Observability (later):** Graylog + Serilog, correlation IDs
-- **Local:** root `docker-compose.yml` (full infra)
+- **Observability:** Graylog + Serilog GELF, correlation IDs (`docs/LOGGING.md`, `docs/HEALTH.md`)
+- **Local:** root `docker-compose.yml` (full infra); `Marketplace.sln` for .NET
 - **EC2 (now):** `docker-compose.web.yml` — Nginx + static `apps/web/public/index.html` on port 80
 
 ## Workflow
@@ -57,3 +59,5 @@ docs/               Architecture, sprints, CI/CD, Cursor guide
 - [docs/SPRINTS.md](docs/SPRINTS.md)
 - [docs/CI_CD.md](docs/CI_CD.md)
 - [docs/SECURITY.md](docs/SECURITY.md)
+- [docs/LOGGING.md](docs/LOGGING.md)
+- [docs/HEALTH.md](docs/HEALTH.md)

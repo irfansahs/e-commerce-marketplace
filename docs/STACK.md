@@ -3,7 +3,7 @@
 ## Seçimler ve gerekçe
 
 - **Next.js (App Router)**: Storefront SEO, SSR/SSG, satıcı/admin route group’ları tek uygulamada.
-- **.NET 8**: Mikroservisler, performans, ekosistem (EF Core, MassTransit vb.).
+- **.NET 10**: Mikroservisler, performans, ekosistem (EF Core, MassTransit vb.).
 - **Ocelot**: .NET ile uyumlu API gateway, route/QoS/JWT entegrasyonu.
 - **Nginx**: Edge reverse proxy, TLS termination (prod), static/SSR yönlendirme.
 - **RabbitMQ**: Olgun mesajlaşma, management UI, DLQ desenleri.
@@ -14,4 +14,6 @@
 
 ## Henüz eklenmeyen (backlog)
 
-Ocelot host, .NET servis image’ları, Graylog compose profile, Next.js app — sprint issue’ları ile eklenecek.
+Ocelot host, .NET servis image’ları, Next.js App Router scaffold — sprint issue’ları ile eklenecek.
+
+BuildingBlocks logging + Identity `/health` scaffold mevcut (`Marketplace.sln`).

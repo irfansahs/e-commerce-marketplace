@@ -17,4 +17,4 @@
 | 10 | Hardening + CI |
 | — | AWS EC2 CI/CD (Faz C, ayrı epic) |
 
-Board: repoda **Projects** sekmesinden veya kullanıcı Projects sayfasından.
+Board: [E-Commerce Marketplace (Project #2)](https://github.com/users/irfansahs/projects/2) — repo **Projects** sekmesinden de erişilir.

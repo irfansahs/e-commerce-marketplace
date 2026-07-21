@@ -38,4 +38,4 @@ docker compose -f docker-compose.web.yml up -d
 # http://localhost:80  (Windows’ta admin gerekebilir; alternatif: NGINX_PORT=8080)
 ```
 
-Tam altyapı (Postgres/Redis/RabbitMQ) için kök `docker-compose.yml` kullanılır.
+Tam altyapı (SQL Server/Redis/RabbitMQ) için kök `docker-compose.yml` kullanılır.

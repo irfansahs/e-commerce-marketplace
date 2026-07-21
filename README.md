@@ -12,7 +12,7 @@
 | Edge | Nginx |
 | Messaging | RabbitMQ |
 | Cache | Redis |
-| Database | PostgreSQL (servis başına DB) |
+| Database | SQL Server 2022 (servis başına DB) |
 | Logs (ileri) | Graylog + Serilog |
 | Lokal | Docker Compose |
 
@@ -38,18 +38,18 @@ docker compose up -d
 
 | Servis | Port | Açıklama |
 |--------|------|----------|
-| PostgreSQL | 5432 | `marketplace` + servis DB’leri (aşağıda) |
+| SQL Server | 1433 | Servis DB’leri (aşağıda); user `sa` |
 | Redis | 6379 | Cache |
 | RabbitMQ | 5672, 15672 | AMQP + Management UI |
 | Nginx | 8080 | Static `index.html` (+ ileride Ocelot) |
 
 RabbitMQ yönetim arayüzü: `http://localhost:15672` (kullanıcı/şifre `.env` içinde).
 
-**PostgreSQL servis veritabanları** (ilk `docker compose up` ile, boş volume):
+**SQL Server servis veritabanları** (`mssql-init` container’ı ile oluşturulur):
 
 `identity_db`, `catalog_db`, `cart_order_db`, `inventory_db`, `payment_db`, `notification_db`
 
-Init script: [infra/postgres/init/01-create-databases.sql](infra/postgres/init/01-create-databases.sql). Mevcut volume’da init tekrar çalışmaz; DB’leri sıfırlamak için:
+Init script: [infra/mssql/init/01-create-databases.sql](infra/mssql/init/01-create-databases.sql) (idempotent T-SQL; her `up` ile eksik DB’ler eklenir). Bağlantı: `localhost,1433`, user `sa`, şifre `.env` (`MSSQL_SA_PASSWORD`). Volume’u sıfırlamak için:
 
 ```bash
 docker compose down -v

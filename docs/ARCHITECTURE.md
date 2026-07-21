@@ -20,10 +20,9 @@ Asenkron iletişim: **RabbitMQ** (domain events, saga adımları).
 
 ## Veri
 
-- PostgreSQL: tek instance; servis başına database:
-  - `marketplace` (varsayılan)
+- SQL Server 2022: tek instance; servis başına database:
   - `identity_db`, `catalog_db`, `cart_order_db`, `inventory_db`, `payment_db`, `notification_db`
-- Lokal oluşturma: [infra/postgres/init/01-create-databases.sql](infra/postgres/init/01-create-databases.sql) (`docker-entrypoint-initdb.d`, yalnızca boş volume).
+- Lokal oluşturma: [infra/mssql/init/01-create-databases.sql](infra/mssql/init/01-create-databases.sql) (`mssql-init` container’ı, idempotent T-SQL). Bağlantı `localhost,1433`, user `sa`.
 - Redis: oturum/cache, gateway QoS yardımcıları.
 - RabbitMQ: exchange/queue tasarımı servis başına dokümante edilecek (DLQ, idempotency).
 

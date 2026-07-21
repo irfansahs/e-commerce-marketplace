@@ -20,7 +20,7 @@ docs/               Architecture, sprints, CI/CD, Cursor guide
 ## Stack
 
 - **API:** Ocelot gateway, Nginx edge
-- **Data:** PostgreSQL (one DB per service), Redis cache
+- **Data:** SQL Server 2022 (one DB per service), Redis cache
 - **Messaging:** RabbitMQ (domain events, sagas)
 - **Observability (later):** Graylog + Serilog, correlation IDs
 - **Local:** root `docker-compose.yml` (full infra)

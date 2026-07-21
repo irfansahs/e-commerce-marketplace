@@ -19,4 +19,4 @@
 
 - JWT secret’lar environment variable
 - Gateway’de JWT doğrulama; servisler trust boundary net
-- RabbitMQ ve Postgres prod’da güçlü parola + network izolasyonu
+- RabbitMQ ve SQL Server prod’da güçlü parola + network izolasyonu

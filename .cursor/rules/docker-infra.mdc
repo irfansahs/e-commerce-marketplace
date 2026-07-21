@@ -6,8 +6,8 @@ alwaysApply: false
 
 # Docker and infra
 
-- Network: `marketplace-network`; named volumes for Postgres, Redis, RabbitMQ data.
-- Local full stack: root [docker-compose.yml](docker-compose.yml) (Postgres 5432, Redis 6379, RabbitMQ 5672/15672, Nginx **8080**).
+- Network: `marketplace-network`; named volumes for SQL Server, Redis, RabbitMQ data.
+- Local full stack: root [docker-compose.yml](docker-compose.yml) (SQL Server 1433, Redis 6379, RabbitMQ 5672/15672, Nginx **8080**). `mssql-init` creates per-service databases.
 - Observability (optional): [docker-compose.observability.yml](docker-compose.observability.yml) profile `observability` — Graylog **9000**, GELF **12201/udp**. Not on EC2 web stack.
 - EC2 web-only: [docker-compose.web.yml](docker-compose.web.yml), `NGINX_PORT=80`.
 - Mount [infra/nginx/nginx.conf](infra/nginx/nginx.conf) and `apps/web/public` for static site.

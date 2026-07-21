@@ -8,7 +8,7 @@
 - **Nginx**: Edge reverse proxy, TLS termination (prod), static/SSR yönlendirme.
 - **RabbitMQ**: Olgun mesajlaşma, management UI, DLQ desenleri.
 - **Redis**: Dağıtık cache, rate limit yardımcıları.
-- **PostgreSQL**: Servis başına DB, ACID.
+- **SQL Server 2022**: Servis başına DB, ACID; .NET/EF Core ile yakın uyum.
 - **Graylog**: Merkezi log, GELF ile container/servis entegrasyonu.
 - **Docker Compose**: Lokal ve EC2’de tutarlı ortam.
 

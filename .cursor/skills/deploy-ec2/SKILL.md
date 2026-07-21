@@ -38,6 +38,6 @@ curl -sI http://127.0.0.1/
 ## Do not
 
 - Put PEM or host secrets in repo, issues, or `docs/decisions/`.
-- Deploy full `docker-compose.yml` on small EC2 without user approval (Postgres/RabbitMQ memory).
+- Deploy full `docker-compose.yml` on small EC2 without user approval (SQL Server needs ~2GB+ RAM; small EC2 cannot run it).
 
 See [docs/CI_CD.md](docs/CI_CD.md).

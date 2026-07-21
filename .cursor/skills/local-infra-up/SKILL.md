@@ -1,11 +1,11 @@
 ---
 name: local-infra-up
-description: Start local Docker infrastructure for marketplace development. Use when user asks docker compose, local postgres, rabbitmq, or dev environment.
+description: Start local Docker infrastructure for marketplace development. Use when user asks docker compose, local sql server, rabbitmq, or dev environment.
 ---
 
 # Local infra up
 
-## Full stack (Postgres, Redis, RabbitMQ, Nginx)
+## Full stack (SQL Server, Redis, RabbitMQ, Nginx)
 
 ```bash
 cp .env.example .env   # if .env missing
@@ -21,7 +21,7 @@ docker compose -f docker-compose.yml -f docker-compose.observability.yml --profi
 
 | Service | Port |
 |---------|------|
-| Postgres | 5432 |
+| SQL Server | 1433 (user `sa`) |
 | Redis | 6379 |
 | RabbitMQ | 5672, UI 15672 |
 | Nginx (static) | 8080 |

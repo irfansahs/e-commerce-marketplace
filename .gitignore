@@ -1,0 +1,40 @@
+# Environment & secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets/
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+*.DotSettings.user
+TestResults/
+*.ncrunch*
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+dist/
+*.tsbuildinfo
+.npm
+.pnpm-store/
+
+# Docker
+docker-compose.override.yml
+
+# OS & IDE
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+*.log
+
+# Coverage & tools
+coverage/
+*.coverage

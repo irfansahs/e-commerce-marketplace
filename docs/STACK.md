@@ -16,4 +16,5 @@
 
 Ocelot host, .NET servis image’ları, Next.js App Router scaffold — sprint issue’ları ile eklenecek.
 
-BuildingBlocks logging + Identity `/health` scaffold mevcut (`Marketplace.sln`).
+BuildingBlocks logging + Identity `/health` scaffold mevcut (`Marketplace.slnx`).
+SDK `global.json` ile .NET 10 feature band'ine sabitlenir; C# dili `Directory.Build.props` üzerinden güncel sürümü kullanır.

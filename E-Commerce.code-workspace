@@ -1,0 +1,37 @@
+{
+  "folders": [
+    {
+      "name": "E-Commerce",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "dotnet.defaultSolution": "Marketplace.slnx",
+    "files.exclude": {
+      "**/bin": true,
+      "**/obj": true,
+      "**/.next": true,
+      "**/node_modules": true
+    },
+    "search.exclude": {
+      "**/bin": true,
+      "**/obj": true,
+      "**/.next": true,
+      "**/node_modules": true
+    },
+    "files.watcherExclude": {
+      "**/bin/**": true,
+      "**/obj/**": true,
+      "**/.next/**": true,
+      "**/node_modules/**": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-dotnettools.csdevkit",
+      "ms-azuretools.vscode-docker",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode"
+    ]
+  }
+}

@@ -27,6 +27,14 @@ infra/                 Nginx, Graylog vb.
 docs/                  Mimari ve sprint dokümanları
 ```
 
+Cursor/VS Code'da backend, UI ve altyapıyı tek E-Commerce çalışma alanında açmak için:
+
+```bash
+code E-Commerce.code-workspace
+```
+
+.NET projeleri güncel XML solution formatındaki `Marketplace.slnx` içindedir. SDK sürümü `global.json`, ortak derleme kuralları `Directory.Build.props` ile yönetilir.
+
 ## Lokal altyapı (Docker)
 
 Önkoşul: [Docker Desktop](https://www.docker.com/products/docker-desktop/) veya Docker Engine + Compose v2.

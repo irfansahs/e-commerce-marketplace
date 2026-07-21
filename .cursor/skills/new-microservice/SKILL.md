@@ -13,7 +13,7 @@ description: Scaffold a new .NET microservice in the monorepo. Use when adding a
    - Project reference to `services/building-blocks/Marketplace.BuildingBlocks`
    - `appsettings.json` + connection string placeholder for dedicated SQL Server DB (`Server=localhost,1433;Database={service}_db;User Id=sa;...`)
    - Dockerfile (multi-stage) when user asks for container deploy
-   - Add project to root `Marketplace.sln`
+   - Add project to root `Marketplace.slnx` under its `services/{service}` solution folder
 3. **Data** — DB name pattern: `{service}_db` on shared SQL Server instance; add the database to [infra/mssql/init/01-create-databases.sql](infra/mssql/init/01-create-databases.sql) (do not share DB with other services).
 4. **Gateway** — add Ocelot route stub comment in `services/gateway` when gateway exists: `/api/{service}/{everything}`.
 5. **Compose** — optional service entry in root `docker-compose.yml` only after image/build exists.

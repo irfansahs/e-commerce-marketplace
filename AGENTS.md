@@ -25,7 +25,7 @@ docs/ Architecture, sprints, CI/CD, Cursor guide
 - **Data:** SQL Server 2022 (one DB per service), Redis cache
 - **Messaging:** RabbitMQ (domain events, sagas)
 - **Observability:** Graylog + Serilog GELF, correlation IDs (`docs/LOGGING.md`, `docs/HEALTH.md`)
-- **Local:** root `docker-compose.yml` (full infra); `Marketplace.sln` for .NET
+- **Local:** root `docker-compose.yml` (full infra); `Marketplace.slnx` for .NET; `E-Commerce.code-workspace` for the full monorepo
 - **EC2 (now):** `docker-compose.web.yml` — Nginx + static `apps/web/public/index.html` on port 80
 
 ## Workflow

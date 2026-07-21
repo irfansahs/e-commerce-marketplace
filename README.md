@@ -53,6 +53,12 @@ Sprint ve backlog GitHub Projects üzerinde yönetilir. Önce altyapı (Docker, 
 
 Bkz. [docs/SPRINTS.md](docs/SPRINTS.md).
 
+## Cursor (AI)
+
+- Proje bağlamı: [AGENTS.md](AGENTS.md)
+- Rehber: [docs/CURSOR_GUIDE.md](docs/CURSOR_GUIDE.md)
+- Rules: `.cursor/rules/` · Skills: `.cursor/skills/` (ör. `/deploy-ec2`)
+
 ## Güvenlik
 
 Asla commit etmeyin: `.env`, `*.pem`, gerçek API anahtarları. Bkz. [docs/SECURITY.md](docs/SECURITY.md).

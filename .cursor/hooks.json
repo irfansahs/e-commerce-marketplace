@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeShellExecution": [
+      {
+        "command": ".cursor/hooks/block-secrets.sh",
+        "matcher": "git add|git commit|git push",
+        "failClosed": false
+      }
+    ]
+  }
+}

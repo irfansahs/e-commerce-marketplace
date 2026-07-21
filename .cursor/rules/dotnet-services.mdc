@@ -1,0 +1,15 @@
+---
+description: .NET microservice conventions
+globs: services/**/*
+alwaysApply: false
+---
+
+# .NET services
+
+- Target .NET 8; one deployable API per folder under `services/`.
+- Expose `GET /health` for orchestration and smoke tests.
+- Use Serilog with correlation ID middleware (when BuildingBlocks exists).
+- Database: dedicated connection string per service (`identity_db`, `catalog_db`, …).
+- Publish domain events to RabbitMQ; document exchange/queue names in service README when added.
+
+Gateway routing (Ocelot, later): `/api/{service}/...` → downstream host.

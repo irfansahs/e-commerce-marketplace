@@ -38,3 +38,6 @@ Thumbs.db
 # Coverage & tools
 coverage/
 *.coverage
+
+# Local chat backups (may contain secrets — redact before commit)
+.specstory/

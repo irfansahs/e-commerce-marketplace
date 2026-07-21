@@ -1,0 +1,15 @@
+---
+description: Core marketplace monorepo and sprint discipline
+alwaysApply: true
+---
+
+# Marketplace core
+
+- Multi-vendor marketplace: bounded contexts in `services/` (Identity, Catalog, Cart-Order, Inventory, Payment, Notification, Gateway).
+- One PostgreSQL database per service; no shared tables across services.
+- Async integration via RabbitMQ events; HTTP via Ocelot + Nginx.
+- Work in sprint order (infra → gateway → domain → UI). Track work as GitHub Issues on Project #2 with **Sprint** field.
+- Minimize diff scope; match existing folder and naming conventions.
+- Do not commit unless the user explicitly asks.
+
+See [AGENTS.md](AGENTS.md) and [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).

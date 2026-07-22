@@ -3,6 +3,9 @@
   <Folder Name="/services/building-blocks/">
     <Project Path="services/building-blocks/Marketplace.BuildingBlocks/Marketplace.BuildingBlocks.csproj" />
   </Folder>
+  <Folder Name="/services/gateway/">
+    <Project Path="services/gateway/Marketplace.Gateway.Api/Marketplace.Gateway.Api.csproj" />
+  </Folder>
   <Folder Name="/services/identity/">
     <Project Path="services/identity/Marketplace.Identity.Api/Marketplace.Identity.Api.csproj" />
   </Folder>

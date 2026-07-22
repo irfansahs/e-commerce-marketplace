@@ -39,7 +39,7 @@ Asenkron iletişim: **RabbitMQ** (domain events, saga adımları).
 ```
 apps/web/
 services/building-blocks/   # Serilog GELF + /health helpers
-services/gateway/           # Ocelot
+services/gateway/           # Ocelot API gateway
 services/identity/          # Identity API (scaffold)
 services/catalog/
 services/cart-order/

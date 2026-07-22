@@ -61,3 +61,6 @@ docs/ Architecture, sprints, CI/CD, Cursor guide
 - [docs/SECURITY.md](docs/SECURITY.md)
 - [docs/LOGGING.md](docs/LOGGING.md)
 - [docs/HEALTH.md](docs/HEALTH.md)
+- [docs/GATEWAY.md](docs/GATEWAY.md)
+- [docs/JWT.md](docs/JWT.md)
+- [docs/TESTING_SPRINT2.md](docs/TESTING_SPRINT2.md)

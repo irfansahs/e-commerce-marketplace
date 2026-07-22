@@ -87,6 +87,8 @@ Sprint ve backlog GitHub Projects üzerinde yönetilir. Önce altyapı (Docker, 
 
 Bkz. [docs/SPRINTS.md](docs/SPRINTS.md).
 
+Gateway + Nginx test adımları (Sprint 2): [docs/TESTING_SPRINT2.md](docs/TESTING_SPRINT2.md).
+
 ## Cursor (AI)
 
 - Proje bağlamı: [AGENTS.md](AGENTS.md)

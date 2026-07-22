@@ -22,7 +22,7 @@ Asenkron iletişim: **RabbitMQ** (domain events, saga adımları).
 
 - SQL Server 2022: tek instance; servis başına database:
   - `identity_db`, `catalog_db`, `cart_order_db`, `inventory_db`, `payment_db`, `notification_db`
-- Lokal oluşturma: [infra/mssql/init/01-create-databases.sql](infra/mssql/init/01-create-databases.sql) (`mssql-init` container’ı, idempotent T-SQL). Bağlantı `localhost,1433`, user `sa`.
+- Lokal oluşturma: [infra/mssql/init/01-create-databases.sql](infra/mssql/init/01-create-databases.sql) (`mssql-init` container’ı, idempotent T-SQL). Host bağlantısı `localhost,14330` (`.env` `MSSQL_HOST_PORT`), user `sa`.
 - Redis: oturum/cache, gateway QoS yardımcıları.
 - RabbitMQ: exchange/queue tasarımı servis başına dokümante edilecek (DLQ, idempotency).
 

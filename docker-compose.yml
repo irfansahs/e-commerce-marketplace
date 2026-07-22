@@ -8,7 +8,7 @@ services:
       MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-Marketplace_Local1!}
       MSSQL_PID: Developer
     ports:
-      - "1433:1433"
+      - "${MSSQL_HOST_PORT:-14330}:1433"
     volumes:
       - mssql_data:/var/opt/mssql
     networks:

@@ -25,7 +25,7 @@ $Sprints = @{
 
 $issues = @(
   @{ Title = "[Sprint 0] Epic: Monorepo and Docker platform"; Labels = "epic,infra"; Sprint = "S0"; Body = "Foundation sprint: monorepo layout, Compose, base infra services." },
-  @{ Title = "[Sprint 0] Per-service PostgreSQL database naming"; Labels = "infra,backend"; Sprint = "S0"; Body = "Create identity_db, catalog_db, etc. via init scripts or migrations." },
+  @{ Title = "[Sprint 0] Per-service SQL Server database naming"; Labels = "infra,backend"; Sprint = "S0"; Body = "Create identity_db, catalog_db, etc. via infra/mssql/init T-SQL and EF migrations." },
   @{ Title = "[Sprint 0] Document local runbook in README"; Labels = "docs"; Sprint = "S0"; Body = "Verify README matches compose ports and env vars." },
 
   @{ Title = "[Sprint 1] Graylog stack (Compose profile observability)"; Labels = "infra,observability"; Sprint = "S1"; Body = "Graylog + dependencies in docker-compose.observability.yml" },

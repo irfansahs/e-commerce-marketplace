@@ -7,7 +7,9 @@
       "launchBrowser": false,
       "applicationUrl": "http://localhost:5211",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "MSSQL_SA_PASSWORD": "Marketplace_Local1!",
+        "MSSQL_HOST_PORT": "14330"
       }
     }
   }

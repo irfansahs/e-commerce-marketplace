@@ -9,6 +9,11 @@ description: Start local Docker infrastructure for marketplace development. Use 
 
 ```bash
 cp .env.example .env   # if .env missing
+```
+
+If `.env` still contains `POSTGRES_*`, replace it from `.env.example` (project uses **SQL Server 2022** only).
+
+```bash
 docker compose up -d
 docker compose ps
 ```
@@ -21,7 +26,7 @@ docker compose -f docker-compose.yml -f docker-compose.observability.yml --profi
 
 | Service | Port |
 |---------|------|
-| SQL Server | 1433 (user `sa`) |
+| SQL Server | 14330 (host) |
 | Redis | 6379 |
 | RabbitMQ | 5672, UI 15672 |
 | Nginx (static) | 8080 |

@@ -44,9 +44,15 @@ cp .env.example .env
 docker compose up -d
 ```
 
+**Important:** `.env` must use **SQL Server** variables (`MSSQL_SA_PASSWORD`, `ACCEPT_EULA`), not legacy `POSTGRES_*`. If you change `MSSQL_SA_PASSWORD` on an existing Docker volume, either use the same password as when the volume was first created or reset with `docker compose down -v` (deletes DB data).
+
+```powershell
+powershell -File scripts/dev-local.ps1 -StartApis -Smoke
+```
+
 | Servis | Port | Açıklama |
 |--------|------|----------|
-| SQL Server | 1433 | Servis DB’leri (aşağıda); user `sa` |
+| SQL Server | **14330** (host; container 1433) | Servis DB’leri (aşağıda); user `sa`. **14330** Windows’ta yerel SQL Server (1433) ile çakışmayı önler. |
 | Redis | 6379 | Cache |
 | RabbitMQ | 5672, 15672 | AMQP + Management UI |
 | Nginx | 8080 | Static `index.html` (+ ileride Ocelot) |
@@ -57,7 +63,7 @@ RabbitMQ yönetim arayüzü: `http://localhost:15672` (kullanıcı/şifre `.env`
 
 `identity_db`, `catalog_db`, `cart_order_db`, `inventory_db`, `payment_db`, `notification_db`
 
-Init script: [infra/mssql/init/01-create-databases.sql](infra/mssql/init/01-create-databases.sql) (idempotent T-SQL; her `up` ile eksik DB’ler eklenir). Bağlantı: `localhost,1433`, user `sa`, şifre `.env` (`MSSQL_SA_PASSWORD`). Volume’u sıfırlamak için:
+Init script: [infra/mssql/init/01-create-databases.sql](infra/mssql/init/01-create-databases.sql) (idempotent T-SQL; her `up` ile eksik DB’ler eklenir). Bağlantı: `localhost,14330` (veya `.env` `MSSQL_HOST_PORT`), user `sa`, şifre `.env` (`MSSQL_SA_PASSWORD`). Volume’u sıfırlamak için:
 
 ```bash
 docker compose down -v

@@ -16,6 +16,12 @@ public static class IdentityConnectionString
             builder.Password = envPassword;
         }
 
+        var hostPort = Environment.GetEnvironmentVariable("MSSQL_HOST_PORT");
+        if (!string.IsNullOrWhiteSpace(hostPort))
+        {
+            builder.DataSource = $"localhost,{hostPort.Trim()}";
+        }
+
         return builder.ConnectionString;
     }
 }

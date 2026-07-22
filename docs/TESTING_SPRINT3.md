@@ -8,11 +8,14 @@ docker compose up -d mssql rabbitmq
 dotnet build Marketplace.slnx
 ```
 
-SQL Server şifresi: kök `.env` içindeki `MSSQL_SA_PASSWORD` ile aynı olmalı. Identity, bu değişkeni ortamdan okur:
+SQL Server: `localhost,14330` (Docker; Windows’ta yerel SQL 1433 ile çakışmaması için). Şifre `.env` → `MSSQL_SA_PASSWORD`. Identity `launchSettings` veya shell:
 
 ```powershell
-$env:MSSQL_SA_PASSWORD = "Marketplace_Local1!"   # .env dosyanızdaki değer
+$env:MSSQL_SA_PASSWORD = "Marketplace_Local1!"
+$env:MSSQL_HOST_PORT = "14330"
 ```
+
+Tek komut: `powershell -File scripts/dev-local.ps1 -StartApis -Smoke`
 
 Migration uygulaması Identity ilk çalıştırmada (Development) otomatik yapılır.
 

@@ -75,19 +75,84 @@ services:
       retries: 5
       start_period: 30s
 
+  identity-api:
+    build:
+      context: .
+      dockerfile: services/identity/Marketplace.Identity.Api/Dockerfile
+    container_name: marketplace-identity-api
+    restart: unless-stopped
+    depends_on:
+      mssql-init:
+        condition: service_completed_successfully
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      Database__ApplyMigrationsOnStartup: "true"
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-Marketplace_Local1!}
+      MSSQL_SERVER: mssql,1433
+      ConnectionStrings__Identity: Server=mssql,1433;Database=identity_db;User Id=sa;Password=Marketplace_Local1!;TrustServerCertificate=True
+      RabbitMQ__Host: rabbitmq
+      RabbitMQ__Port: "5672"
+      RabbitMQ__UserName: ${RABBITMQ_DEFAULT_USER:-marketplace}
+      RabbitMQ__Password: ${RABBITMQ_DEFAULT_PASS:-change_me_local_only}
+      Jwt__SigningKey: dev-only-signing-key-min-32-chars!!
+      Gelf__Enabled: "true"
+      Gelf__Host: graylog
+      Gelf__Port: "12201"
+    networks:
+      - marketplace
+
+  gateway-api:
+    build:
+      context: .
+      dockerfile: services/gateway/Marketplace.Gateway.Api/Dockerfile
+    container_name: marketplace-gateway-api
+    restart: unless-stopped
+    depends_on:
+      identity-api:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      Jwt__Enabled: "false"
+      Gelf__Enabled: "true"
+      Gelf__Host: graylog
+      Gelf__Port: "12201"
+    networks:
+      - marketplace
+
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    container_name: marketplace-web
+    restart: unless-stopped
+    depends_on:
+      gateway-api:
+        condition: service_healthy
+    environment:
+      INTERNAL_API_URL: http://gateway-api:8080
+      COOKIE_SECURE: "false"
+    networks:
+      - marketplace
+
   nginx:
     image: nginx:1.27-alpine
     container_name: marketplace-nginx
     restart: unless-stopped
+    depends_on:
+      web:
+        condition: service_healthy
+      gateway-api:
+        condition: service_healthy
     ports:
       - "${NGINX_PORT:-8080}:80"
     volumes:
       - ./infra/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./apps/web/public:/usr/share/nginx/html:ro
     networks:
       - marketplace
     healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1/ || exit 1"]
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1/tr || exit 1"]
       interval: 15s
       timeout: 5s
       retries: 3

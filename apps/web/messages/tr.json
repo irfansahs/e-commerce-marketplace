@@ -1,0 +1,51 @@
+{
+  "common": {
+    "marketplace": "Marketplace",
+    "login": "Giriş yap",
+    "register": "Kayıt ol",
+    "logout": "Çıkış",
+    "account": "Hesabım",
+    "email": "E-posta",
+    "password": "Şifre",
+    "submit": "Gönder",
+    "loading": "Yükleniyor…",
+    "themeLight": "Açık tema",
+    "themeDark": "Koyu tema",
+    "language": "Dil"
+  },
+  "home": {
+    "title": "Çok satıcılı pazaryeri",
+    "subtitle": "Alışverişe başlamak için giriş yapın veya hesap oluşturun.",
+    "ctaLogin": "Giriş yap",
+    "ctaRegister": "Kayıt ol"
+  },
+  "auth": {
+    "loginTitle": "Giriş",
+    "loginSubtitle": "Hesabınıza erişin",
+    "registerTitle": "Kayıt",
+    "registerSubtitle": "Alıcı hesabı oluşturun",
+    "noAccount": "Hesabınız yok mu?",
+    "hasAccount": "Zaten hesabınız var mı?",
+    "loginSuccess": "Giriş başarılı",
+    "registerSuccess": "Kayıt başarılı",
+    "logoutSuccess": "Çıkış yapıldı"
+  },
+  "account": {
+    "title": "Hesabım",
+    "role": "Rol",
+    "emailLabel": "E-posta"
+  },
+  "errors": {
+    "IDENTITY_EMAIL_TAKEN": "E-posta zaten kayıtlı",
+    "IDENTITY_INVALID_CREDENTIALS": "E-posta veya şifre hatalı",
+    "IDENTITY_VALIDATION_EMAIL": "Geçerli bir e-posta girin",
+    "IDENTITY_VALIDATION_PASSWORD": "Şifre en az 8 karakter olmalı",
+    "IDENTITY_VALIDATION_FAILED": "E-posta ve şifre gerekli",
+    "generic": "Bir hata oluştu"
+  },
+  "validation": {
+    "email": "Geçerli bir e-posta girin",
+    "passwordMin": "Şifre en az 8 karakter olmalı",
+    "passwordRequired": "Şifre gerekli"
+  }
+}

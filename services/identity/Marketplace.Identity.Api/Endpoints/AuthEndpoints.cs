@@ -1,11 +1,9 @@
 using System.Security.Claims;
-using System.Text;
 using Marketplace.BuildingBlocks.Localization;
 using Marketplace.Identity.Api.Auth;
 using Marketplace.Identity.Api.Data;
 using Marketplace.Identity.Api.Messaging;
 using Marketplace.Identity.Api.Resources;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
@@ -30,18 +28,22 @@ public static class AuthEndpoints
         JwtTokenService tokenService,
         IIntegrationEventPublisher publisher,
         IStringLocalizer<IdentityResources> localizer,
+        ILoggerFactory loggerFactory,
         HttpContext httpContext,
         CancellationToken cancellationToken)
     {
+        var logger = loggerFactory.CreateLogger("Marketplace.Identity.Auth");
         var validation = ValidateRegister(request, localizer);
         if (validation is not null)
         {
+            AuthAudit.RegisterFail(logger, request.Email?.Trim() ?? "", "validation");
             return validation;
         }
 
         var normalizedEmail = request.Email.Trim().ToLowerInvariant();
         if (await db.Users.AnyAsync(u => u.Email == normalizedEmail, cancellationToken))
         {
+            AuthAudit.RegisterFail(logger, normalizedEmail, "email_taken");
             return MarketplaceProblemDetails.FromLocalizer(
                 "IDENTITY_EMAIL_TAKEN",
                 StatusCodes.Status409Conflict,
@@ -72,6 +74,8 @@ public static class AuthEndpoints
                 DateTime.UtcNow),
             cancellationToken);
 
+        AuthAudit.RegisterOk(logger, user.Email, user.Id);
+
         var token = tokenService.CreateAccessToken(user);
         return Results.Created(
             $"/auth/me",
@@ -83,10 +87,14 @@ public static class AuthEndpoints
         IdentityDbContext db,
         JwtTokenService tokenService,
         IStringLocalizer<IdentityResources> localizer,
+        ILoggerFactory loggerFactory,
         CancellationToken cancellationToken)
     {
+        var logger = loggerFactory.CreateLogger("Marketplace.Identity.Auth");
+
         if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
         {
+            AuthAudit.LoginFail(logger, request.Email?.Trim() ?? "", "validation");
             return MarketplaceProblemDetails.FromLocalizer(
                 "IDENTITY_VALIDATION_FAILED",
                 StatusCodes.Status400BadRequest,
@@ -97,11 +105,15 @@ public static class AuthEndpoints
         var user = await db.Users.FirstOrDefaultAsync(u => u.Email == normalizedEmail, cancellationToken);
         if (user is null || !PasswordHasher.Verify(request.Password, user.PasswordHash, user.PasswordSalt))
         {
+            // Same client message either way; reason is for internal audit only.
+            AuthAudit.LoginFail(logger, normalizedEmail, user is null ? "unknown_user" : "bad_password");
             return MarketplaceProblemDetails.FromLocalizer(
                 "IDENTITY_INVALID_CREDENTIALS",
                 StatusCodes.Status401Unauthorized,
                 localizer);
         }
+
+        AuthAudit.LoginOk(logger, user.Email, user.Id, user.Role.ToString());
 
         var token = tokenService.CreateAccessToken(user);
         return Results.Ok(new LoginResponse(token.Token, token.ExpiresInSeconds));

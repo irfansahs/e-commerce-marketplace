@@ -7,8 +7,9 @@ alwaysApply: false
 # Next.js web
 
 - Use App Router under `apps/web/`.
-- Route groups: public storefront (SEO), seller panel, admin — separate layouts.
+- Run **only in Docker** (`web` service); public entry is Nginx **8080**. Do not rely on host `pnpm dev` for the local stack.
+- Auth: Next Route Handlers under `/api/auth/*` as BFF; JWT in httpOnly cookie (`marketplace_access_token`). Call Identity via `INTERNAL_API_URL` → gateway. See [docs/WEB_AUTH.md](docs/WEB_AUTH.md).
+- UI: Tailwind CSS + shadcn-style components, `next-themes` (class / dark), forms with react-hook-form + zod.
 - Prefer Server Components for catalog/product pages; client components for interactive cart/auth.
-- Call backend via gateway base URL from env (never hardcode production hosts in source).
-- Static landing lives in `apps/web/public/` until full app scaffold exists.
-- i18n (Sprint 8 scaffold): **next-intl**, URL segment `[locale]` (`tr` default, `en` fallback). API calls send `Accept-Language` matching locale ([docs/I18N.md](docs/I18N.md)).
+- i18n: **next-intl**, URL segment `[locale]` (`tr` default, `en` fallback). BFF sends `Accept-Language` matching locale ([docs/I18N.md](docs/I18N.md)).
+- Route groups: public storefront (SEO), seller panel, admin — separate layouts when added.

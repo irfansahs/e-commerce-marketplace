@@ -40,7 +40,9 @@ app.MapAuthEndpoints();
 await using (var scope = app.Services.CreateAsyncScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<IdentityDbContext>();
-    if (app.Environment.IsDevelopment())
+    var applyMigrations = app.Environment.IsDevelopment()
+        || app.Configuration.GetValue("Database:ApplyMigrationsOnStartup", false);
+    if (applyMigrations)
     {
         await db.Database.MigrateAsync();
         await IdentityDbSeeder.SeedAsync(db);

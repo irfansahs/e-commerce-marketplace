@@ -1,0 +1,15 @@
+**/.git
+**/.vs
+**/.vscode
+**/.cursor
+**/bin
+**/obj
+**/*.user
+.env
+.env.*
+!.env.example
+**/node_modules
+apps/web/.next
+**/*.md
+docs/
+agent-transcripts/

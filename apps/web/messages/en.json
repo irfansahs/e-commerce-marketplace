@@ -1,0 +1,51 @@
+{
+  "common": {
+    "marketplace": "Marketplace",
+    "login": "Log in",
+    "register": "Sign up",
+    "logout": "Log out",
+    "account": "Account",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Submit",
+    "loading": "Loading…",
+    "themeLight": "Light theme",
+    "themeDark": "Dark theme",
+    "language": "Language"
+  },
+  "home": {
+    "title": "Multi-vendor marketplace",
+    "subtitle": "Sign in or create an account to start shopping.",
+    "ctaLogin": "Log in",
+    "ctaRegister": "Sign up"
+  },
+  "auth": {
+    "loginTitle": "Log in",
+    "loginSubtitle": "Access your account",
+    "registerTitle": "Sign up",
+    "registerSubtitle": "Create a buyer account",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "loginSuccess": "Signed in successfully",
+    "registerSuccess": "Account created",
+    "logoutSuccess": "Signed out"
+  },
+  "account": {
+    "title": "Account",
+    "role": "Role",
+    "emailLabel": "Email"
+  },
+  "errors": {
+    "IDENTITY_EMAIL_TAKEN": "Email is already registered",
+    "IDENTITY_INVALID_CREDENTIALS": "Invalid email or password",
+    "IDENTITY_VALIDATION_EMAIL": "Enter a valid email",
+    "IDENTITY_VALIDATION_PASSWORD": "Password must be at least 8 characters",
+    "IDENTITY_VALIDATION_FAILED": "Email and password are required",
+    "generic": "Something went wrong"
+  },
+  "validation": {
+    "email": "Enter a valid email",
+    "passwordMin": "Password must be at least 8 characters",
+    "passwordRequired": "Password is required"
+  }
+}

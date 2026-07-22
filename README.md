@@ -41,13 +41,15 @@ code E-Commerce.code-workspace
 
 ```bash
 cp .env.example .env
-docker compose up -d
+docker compose up -d --build
 ```
+
+Backend (**Identity**, **Gateway**) ve storefront (**Next.js `web`**) yalnızca Docker’da çalışır. Tarayıcı girişi: **`http://localhost:8080`** (Nginx → UI + `/api/auth` BFF + `/api/identity` gateway).
 
 **Important:** `.env` must use **SQL Server** variables (`MSSQL_SA_PASSWORD`, `ACCEPT_EULA`), not legacy `POSTGRES_*`. If you change `MSSQL_SA_PASSWORD` on an existing Docker volume, either use the same password as when the volume was first created or reset with `docker compose down -v` (deletes DB data).
 
 ```powershell
-powershell -File scripts/dev-local.ps1 -StartApis -Smoke
+powershell -File scripts/dev-local.ps1 -Smoke
 ```
 
 | Servis | Port | Açıklama |
@@ -55,7 +57,9 @@ powershell -File scripts/dev-local.ps1 -StartApis -Smoke
 | SQL Server | **14330** (host; container 1433) | Servis DB’leri (aşağıda); user `sa`. **14330** Windows’ta yerel SQL Server (1433) ile çakışmayı önler. |
 | Redis | 6379 | Cache |
 | RabbitMQ | 5672, 15672 | AMQP + Management UI |
-| Nginx | 8080 | Static `index.html` (+ ileride Ocelot) |
+| Nginx | 8080 | Next UI + `/api/auth` → web, `/api/identity` → Gateway |
+| web (Next.js) | *(Docker only)* | Port 3000 internal |
+| Identity / Gateway | *(Docker only)* | Host port yok |
 
 RabbitMQ yönetim arayüzü: `http://localhost:15672` (kullanıcı/şifre `.env` içinde).
 
@@ -96,6 +100,8 @@ Bkz. [docs/SPRINTS.md](docs/SPRINTS.md).
 Gateway + Nginx test adımları (Sprint 2): [docs/TESTING_SPRINT2.md](docs/TESTING_SPRINT2.md).
 
 Identity + i18n (Sprint 3): [docs/TESTING_SPRINT3.md](docs/TESTING_SPRINT3.md).
+
+Next.js auth UI (Sprint 4): [docs/TESTING_SPRINT4.md](docs/TESTING_SPRINT4.md), [docs/WEB_AUTH.md](docs/WEB_AUTH.md).
 
 ## Cursor (AI)
 

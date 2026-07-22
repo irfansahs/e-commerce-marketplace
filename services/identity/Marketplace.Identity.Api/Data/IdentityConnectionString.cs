@@ -17,7 +17,12 @@ public static class IdentityConnectionString
         }
 
         var hostPort = Environment.GetEnvironmentVariable("MSSQL_HOST_PORT");
-        if (!string.IsNullOrWhiteSpace(hostPort))
+        var server = Environment.GetEnvironmentVariable("MSSQL_SERVER");
+        if (!string.IsNullOrWhiteSpace(server))
+        {
+            builder.DataSource = server.Trim();
+        }
+        else if (!string.IsNullOrWhiteSpace(hostPort))
         {
             builder.DataSource = $"localhost,{hostPort.Trim()}";
         }

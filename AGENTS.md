@@ -25,8 +25,8 @@ docs/ Architecture, sprints, CI/CD, Cursor guide
 - **Data:** SQL Server 2022 (one DB per service), Redis cache
 - **Messaging:** RabbitMQ (domain events, sagas)
 - **Observability:** Graylog + Serilog GELF, correlation IDs (`docs/LOGGING.md`, `docs/HEALTH.md`)
-- **Local:** root `docker-compose.yml` (full infra); `Marketplace.slnx` for .NET; `E-Commerce.code-workspace` for the full monorepo
-- **EC2 (now):** `docker-compose.web.yml` — Nginx + static `apps/web/public/index.html` on port 80
+- **Local:** root `docker-compose.yml` (infra + **identity-api** + **gateway-api** + **web** Next.js + Nginx); UI+API at `http://localhost:8080` — no host `dotnet run` / `pnpm dev`. `dotnet build` for API compile checks only.
+- **EC2 (now):** `docker-compose.web.yml` — Nginx + static fallback (full Next on EC2 later)
 
 ## Workflow
 
@@ -43,7 +43,7 @@ docs/ Architecture, sprints, CI/CD, Cursor guide
 ## Deploy
 
 - **CI:** `.github/workflows/deploy-ec2.yml` on `main` push → SSH → `docker compose -f docker-compose.web.yml up -d`
-- **Local full stack:** `cp .env.example .env` then `docker compose up -d`
+- **Local full stack:** `cp .env.example .env` then `docker compose up -d --build`
 - **Local web only:** `docker compose -f docker-compose.web.yml up -d`
 
 ## Cursor project assets
@@ -66,5 +66,7 @@ docs/ Architecture, sprints, CI/CD, Cursor guide
 - [docs/JWT.md](docs/JWT.md)
 - [docs/TESTING_SPRINT2.md](docs/TESTING_SPRINT2.md)
 - [docs/TESTING_SPRINT3.md](docs/TESTING_SPRINT3.md)
+- [docs/TESTING_SPRINT4.md](docs/TESTING_SPRINT4.md)
+- [docs/WEB_AUTH.md](docs/WEB_AUTH.md)
 - [docs/IDENTITY.md](docs/IDENTITY.md)
 - [docs/MESSAGING.md](docs/MESSAGING.md)

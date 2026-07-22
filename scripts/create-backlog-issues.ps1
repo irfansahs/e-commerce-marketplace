@@ -39,23 +39,24 @@ $issues = @(
   @{ Title = "[Sprint 3] Identity service - register/login/JWT"; Labels = "backend"; Sprint = "S3"; Body = "Roles: Buyer, Seller, Admin." },
   @{ Title = "[Sprint 3] UserRegistered event to RabbitMQ"; Labels = "backend,messaging"; Sprint = "S3"; Body = "Outbox or direct publish pattern." },
 
-  @{ Title = "[Sprint 4] Catalog - product/category/seller listing"; Labels = "backend"; Sprint = "S4"; Body = "Multi-vendor ownership rules." },
-  @{ Title = "[Sprint 4] Catalog domain events"; Labels = "backend,messaging"; Sprint = "S4"; Body = "ProductCreated/Updated publishers." },
+  @{ Title = "[Sprint 4] Epic: Next.js storefront scaffold"; Labels = "epic,frontend"; Sprint = "S4"; Body = "App Router, Docker web, Nginx, next-intl, shadcn, dark theme." },
+  @{ Title = "[Sprint 4] Auth UI login register session"; Labels = "frontend"; Sprint = "S4"; Body = "BFF httpOnly cookies, /me account page." },
 
-  @{ Title = "[Sprint 5] Inventory stock reservation model"; Labels = "backend"; Sprint = "S5"; Body = "Reserve/release on order flow." },
-  @{ Title = "[Sprint 5] RabbitMQ topology exchanges queues DLQ"; Labels = "messaging,infra"; Sprint = "S5"; Body = "Document idempotency and retry policy." },
+  @{ Title = "[Sprint 5] Catalog - product/category/seller listing"; Labels = "backend"; Sprint = "S5"; Body = "Multi-vendor ownership rules." },
+  @{ Title = "[Sprint 5] Catalog domain events"; Labels = "backend,messaging"; Sprint = "S5"; Body = "ProductCreated/Updated publishers." },
 
-  @{ Title = "[Sprint 6] Cart API"; Labels = "backend"; Sprint = "S6"; Body = "Session/user cart." },
-  @{ Title = "[Sprint 6] Order checkout state machine"; Labels = "backend,messaging"; Sprint = "S6"; Body = "Saga/choreography outline with Inventory and Payment." },
+  @{ Title = "[Sprint 6] Storefront catalog UI"; Labels = "frontend"; Sprint = "S6"; Body = "Product list/detail with next-intl." },
 
-  @{ Title = "[Sprint 7] Payment adapter stub"; Labels = "backend"; Sprint = "S7"; Body = "PaymentSucceeded/Failed events." },
-  @{ Title = "[Sprint 7] Notification service event consumer"; Labels = "backend,messaging"; Sprint = "S7"; Body = "Email/in-app stub." },
+  @{ Title = "[Sprint 7] Inventory stock reservation model"; Labels = "backend"; Sprint = "S7"; Body = "Reserve/release on order flow." },
+  @{ Title = "[Sprint 7] RabbitMQ topology exchanges queues DLQ"; Labels = "messaging,infra"; Sprint = "S7"; Body = "Document idempotency and retry policy." },
 
-  @{ Title = "[Sprint 8] Next.js App Router scaffold"; Labels = "frontend"; Sprint = "S8"; Body = "apps/web with auth and catalog browse." },
-  @{ Title = "[Sprint 8] Product detail SEO pages"; Labels = "frontend"; Sprint = "S8"; Body = "SSR/SSG for storefront." },
+  @{ Title = "[Sprint 8] Cart API"; Labels = "backend"; Sprint = "S8"; Body = "Session/user cart." },
+  @{ Title = "[Sprint 8] Order checkout state machine"; Labels = "backend,messaging"; Sprint = "S8"; Body = "Saga/choreography outline with Inventory and Payment." },
 
-  @{ Title = "[Sprint 9] Seller panel route group and authz"; Labels = "frontend,backend"; Sprint = "S9"; Body = "Product and inventory management UI." },
+  @{ Title = "[Sprint 9] Checkout UI + seller panel scaffold"; Labels = "frontend,backend"; Sprint = "S9"; Body = "Checkout flow and seller route group." },
 
+  @{ Title = "[Sprint 10] Payment adapter stub"; Labels = "backend"; Sprint = "S10"; Body = "PaymentSucceeded/Failed events." },
+  @{ Title = "[Sprint 10] Notification service event consumer"; Labels = "backend,messaging"; Sprint = "S10"; Body = "Email/in-app stub." },
   @{ Title = "[Sprint 10] CI build test docker"; Labels = "infra,backend,frontend"; Sprint = "S10"; Body = "GitHub Actions on PR." },
   @{ Title = "[Sprint 10] Security checklist"; Labels = "docs,backend"; Sprint = "S10"; Body = "CORS, secrets, gateway auth review." },
 

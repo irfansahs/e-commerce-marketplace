@@ -1,4 +1,4 @@
-@baseUrl = http://localhost:5280
+@baseUrl = http://localhost:8080
 @token = 
 
 ### Register
@@ -25,5 +25,5 @@ Content-Type: application/json
 GET {{baseUrl}}/api/identity/auth/me
 Authorization: Bearer {{login.response.body.accessToken}}
 
-### Health direct
-GET http://localhost:5211/health
+### Health (via Nginx + Gateway)
+GET {{baseUrl}}/api/identity/health

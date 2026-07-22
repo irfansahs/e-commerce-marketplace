@@ -1,95 +1,58 @@
 # Sprint 3 test rehberi (i18n + Identity + RabbitMQ)
 
-## 1) Altyapı
+Tüm servisler **Docker Compose** içinde çalışır; host’ta `dotnet run` yok.
+
+## 1) Stack
 
 ```powershell
 cd C:\Users\irfan\OneDrive\Masaüstü\e-commerce
-docker compose up -d mssql rabbitmq
-dotnet build Marketplace.slnx
+powershell -File scripts/dev-local.ps1 -Smoke
 ```
 
-SQL Server: `localhost,14330` (Docker; Windows’ta yerel SQL 1433 ile çakışmaması için). Şifre `.env` → `MSSQL_SA_PASSWORD`. Identity `launchSettings` veya shell:
+veya:
 
 ```powershell
-$env:MSSQL_SA_PASSWORD = "Marketplace_Local1!"
-$env:MSSQL_HOST_PORT = "14330"
+docker compose up -d --build
 ```
 
-Tek komut: `powershell -File scripts/dev-local.ps1 -StartApis -Smoke`
+Migration + admin seed: `identity-api` container’ında `Database__ApplyMigrationsOnStartup=true` ile otomatik.
 
-Migration uygulaması Identity ilk çalıştırmada (Development) otomatik yapılır.
+## 2) API tabanı
 
-## 2) Servisleri başlat
-
-**Terminal A**
-
-```powershell
-dotnet run --project services\identity\Marketplace.Identity.Api
-```
-
-**Terminal B**
-
-```powershell
-dotnet run --project services\gateway\Marketplace.Gateway.Api
-```
+| Yol | Açıklama |
+|-----|----------|
+| `http://localhost:8080/api/identity/...` | Nginx → Gateway → Identity (tercih edilen) |
 
 ## 3) Register (Türkçe hata metni)
 
 ```powershell
-curl.exe -s -X POST http://localhost:5280/api/identity/auth/register `
-  -H "Content-Type: application/json" `
-  -H "Accept-Language: tr" `
-  -d "{\"email\":\"buyer@test.com\",\"password\":\"Test1234!\"}"
+Invoke-RestMethod -Uri "http://localhost:8080/api/identity/auth/register" -Method Post `
+  -ContentType "application/json" -Headers @{ "Accept-Language" = "tr" } `
+  -Body '{"email":"buyer@test.com","password":"Test1234!"}'
 ```
 
 201 + `accessToken` beklenir.
 
-Aynı e-posta tekrar (409, `errorCode`: `IDENTITY_EMAIL_TAKEN`, Türkçe `title`):
-
-```powershell
-curl.exe -s -X POST http://localhost:5280/api/identity/auth/register `
-  -H "Content-Type: application/json" `
-  -H "Accept-Language: tr" `
-  -d "{\"email\":\"buyer@test.com\",\"password\":\"Test1234!\"}"
-```
-
-İngilizce `title` için `Accept-Language: en` kullan; `errorCode` aynı kalmalı.
-
 ## 4) Login + /me
 
-```powershell
-curl.exe -s -X POST http://localhost:5280/api/identity/auth/login `
-  -H "Content-Type: application/json" `
-  -d "{\"email\":\"buyer@test.com\",\"password\":\"Test1234!\"}"
-```
-
-Token’ı kopyala:
+Login sonrası token ile:
 
 ```powershell
-curl.exe -s http://localhost:5280/api/identity/auth/me `
-  -H "Authorization: Bearer YOUR_TOKEN_HERE"
+Invoke-RestMethod -Uri "http://localhost:8080/api/identity/auth/me" `
+  -Headers @{ Authorization = "Bearer YOUR_TOKEN" }
 ```
 
 ## 5) Admin seed (dev)
 
-```powershell
-curl.exe -s -X POST http://localhost:5280/api/identity/auth/login `
-  -H "Content-Type: application/json" `
-  -d "{\"email\":\"admin@marketplace.local\",\"password\":\"Admin123!\"}"
-```
+`admin@marketplace.local` / `Admin123!` — login endpoint aynı.
 
 ## 6) RabbitMQ
 
-- UI: http://localhost:15672 (user/pass `.env` — default `marketplace` / `change_me_local_only`)
-- Exchange `marketplace.events` register sonrası oluşur; publish log Identity konsolunda görünür.
+- UI: http://localhost:15672 (`.env` kullanıcı/şifre)
+- Exchange `marketplace.events` register sonrası oluşur.
 
-## 7) Nginx (opsiyonel)
-
-Gateway + Identity açıkken:
+## 7) Loglar
 
 ```powershell
-docker compose up -d nginx
-curl.exe -s http://localhost:8080/api/identity/health
+docker compose logs -f identity-api gateway-api
 ```
-
-Bkz. [TESTING_SPRINT2.md](TESTING_SPRINT2.md).

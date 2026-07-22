@@ -20,8 +20,14 @@ docker compose -f docker-compose.yml -f docker-compose.observability.yml --profi
 ## GELF (for .NET Serilog)
 
 - UDP **12201** on host → Graylog container
-- In Graylog UI: **System → Inputs → GELF UDP** (create if not auto-configured; bind 0.0.0.0:12201)
-- .NET wiring: [docs/LOGGING.md](../../docs/LOGGING.md) (`AddMarketplaceLogging` + Identity smoke host)
+- Create input once (Graylog does **not** auto-create it):
+
+```powershell
+pwsh -File scripts/ensure-graylog-gelf-input.ps1
+```
+
+Or UI: **System → Inputs → GELF UDP**, bind `0.0.0.0:12201`.
+- .NET wiring: [docs/LOGGING.md](../../docs/LOGGING.md) — auth audit lives in **Identity** (`EventType:identity.auth.login_failed`)
 
 ## Resources
 

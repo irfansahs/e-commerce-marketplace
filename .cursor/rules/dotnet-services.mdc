@@ -9,6 +9,7 @@ alwaysApply: false
 - Target .NET 10; one deployable API per folder under `services/`.
 - Expose `GET /health` via `MapMarketplaceHealth` (see [docs/HEALTH.md](docs/HEALTH.md)).
 - Use `AddMarketplaceLogging` + `UseMarketplaceCorrelationId` from `Marketplace.BuildingBlocks` (see [docs/LOGGING.md](docs/LOGGING.md)).
+- Localization: `AddMarketplaceLocalization` + `UseMarketplaceLocalization`; API errors via `MarketplaceProblemDetails` + **`errorCode`** (see [docs/I18N.md](docs/I18N.md)).
 - Database: SQL Server; dedicated database + connection string per service (`identity_db`, `catalog_db`, …). Use EF Core with `Microsoft.EntityFrameworkCore.SqlServer`.
 - Publish domain events to RabbitMQ; document exchange/queue names in service README when added.
 

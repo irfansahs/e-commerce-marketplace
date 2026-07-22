@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="IDENTITY_EMAIL_TAKEN" xml:space="preserve"><value>Email is already registered</value></data>
+  <data name="IDENTITY_INVALID_CREDENTIALS" xml:space="preserve"><value>Invalid email or password</value></data>
+  <data name="IDENTITY_VALIDATION_EMAIL" xml:space="preserve"><value>Enter a valid email address</value></data>
+  <data name="IDENTITY_VALIDATION_PASSWORD" xml:space="preserve"><value>Password must be at least 8 characters</value></data>
+  <data name="IDENTITY_VALIDATION_FAILED" xml:space="preserve"><value>Invalid request</value></data>
+</root>

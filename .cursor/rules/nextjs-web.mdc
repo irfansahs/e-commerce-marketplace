@@ -11,3 +11,4 @@ alwaysApply: false
 - Prefer Server Components for catalog/product pages; client components for interactive cart/auth.
 - Call backend via gateway base URL from env (never hardcode production hosts in source).
 - Static landing lives in `apps/web/public/` until full app scaffold exists.
+- i18n (Sprint 8 scaffold): **next-intl**, URL segment `[locale]` (`tr` default, `en` fallback). API calls send `Accept-Language` matching locale ([docs/I18N.md](docs/I18N.md)).

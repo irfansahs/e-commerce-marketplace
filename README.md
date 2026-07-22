@@ -89,6 +89,8 @@ Bkz. [docs/SPRINTS.md](docs/SPRINTS.md).
 
 Gateway + Nginx test adımları (Sprint 2): [docs/TESTING_SPRINT2.md](docs/TESTING_SPRINT2.md).
 
+Identity + i18n (Sprint 3): [docs/TESTING_SPRINT3.md](docs/TESTING_SPRINT3.md).
+
 ## Cursor (AI)
 
 - Proje bağlamı: [AGENTS.md](AGENTS.md)

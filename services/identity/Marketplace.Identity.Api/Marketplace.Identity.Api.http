@@ -1,6 +1,29 @@
-@Marketplace.Identity.Api_HostAddress = http://localhost:5211
+@baseUrl = http://localhost:5280
+@token = 
 
-GET {{Marketplace.Identity.Api_HostAddress}}/weatherforecast/
-Accept: application/json
+### Register
+POST {{baseUrl}}/api/identity/auth/register
+Content-Type: application/json
+Accept-Language: tr
 
-###
+{
+  "email": "buyer@test.com",
+  "password": "Test1234!"
+}
+
+### Login
+# @name login
+POST {{baseUrl}}/api/identity/auth/login
+Content-Type: application/json
+
+{
+  "email": "buyer@test.com",
+  "password": "Test1234!"
+}
+
+### Me
+GET {{baseUrl}}/api/identity/auth/me
+Authorization: Bearer {{login.response.body.accessToken}}
+
+### Health direct
+GET http://localhost:5211/health
